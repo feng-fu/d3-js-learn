@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>demo2</title>
+  <style>
+    #myid {
+      background-color: orange;
+    }
+  </style>
+</head>
+<body>
+  <p>Apple</p>
+  <p>Pear</p>
+  <p class='aaa'>Banana</p>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script>
+    var p1 = d3.select('p');
+    var body = d3.select('body')
+    var aaa = body.select('.aaa')
+    p1.style('font-weight','900');
+    // 插入元素
+    body.append('p').text('asfasdfasdf').style({
+      "color":"red",
+      "font-size":"45px"
+    })
+    body.insert('p','.aaa').text('insert')
+  </script>
+</body>
+</html>

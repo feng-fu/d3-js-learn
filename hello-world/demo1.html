@@ -1,0 +1,36 @@
+<html>
+<head> 
+  <meta charset="utf-8"> 
+  <title>HelloWorld</title> 
+</head> 
+<body> 
+  <p>Hello World 1</p>
+  <p>Hello World 2</p>
+  <p>Hello World 3</p>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script> 
+  <script>  
+  // 选择器
+    var p = d3.select("body").selectAll("p").text(" www.decembercafe.org");
+    p.style('color','red');
+  // 数据绑定
+  // -- datum
+    var str = 'china';
+    var body = d3.select('body');
+    var p = body.selectAll('p');
+    p.datum(str)
+    p.text(function(d,i){
+      return '第' + i + '个元素的绑定数据是' + d;
+    })
+
+  // -- data
+
+    var dataset = ['come','go','in'];
+    p.data(dataset).text(
+      function(d,i){
+        return d + 'xxx' + i;
+      }
+    )
+
+  </script> 
+</body> 
+</html>
