@@ -1,7 +1,7 @@
 <html>
 <head> 
   <meta charset="utf-8"> 
-  <title>first-chart</title> 
+  <title>add-scale-chart</title> 
 </head> 
 <body> 
 
@@ -10,7 +10,39 @@
 
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <script>
+    var dataset = [1.7,0.4,1,4.1,0.9,3.2]
+    var min = d3.min(dataset)
+    var max = d3.max(dataset)
+
+    var linear = d3.scale.linear()
+    .domain([min,max])  // 定义域
+    .range([0,300])    // 值域
+
+    var index = [0,1,2,3,4]
     
+    var color = ['red','orange','green','yellow','black']
+
+    var ordinal = d3.scale.ordinal()
+    .domain(index).range(color)
+    var width = '300px',
+        height = '300px',
+        svg = d3.select('body').append('svg')
+        .attr('width',width)
+        .attr('height',height);
+    var rectHeight = 25;
+    svg.selectAll("rect").data(dataset)
+    .enter().append('rect').attr({
+      'x':20,
+      'y':function(d,i){
+        return i * rectHeight;
+      },
+      "width":function(d){
+        console.log(linear(d))
+        return linear(d)
+      },
+      "height":rectHeight - 2,
+      "fill":"green"
+    })
   </script>
 </body> 
 </html>

@@ -1,0 +1,43 @@
+<html>
+<head> 
+  <meta charset="utf-8"> 
+  <title>HelloWorld</title> 
+  <style>
+    .axis path,
+    .axis line {
+      fill:none;
+      stroke: orange;
+      shape-rendering: crispEdges;
+    }
+
+    .axis text {
+      font-family: '楷书',
+      font-size: 11px;
+    }
+  </style>
+</head> 
+<body>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script> 
+  <script>
+    var height = 300;
+    var width = 300;
+    var svg = d3.select('body').append('svg').attr({
+      width:width,
+      height:height
+    })
+    var dataset = [2.5,2.1,1.7,1.3,.9]
+
+    var linear = d3.scale.linear()
+    .domain([0,d3.max(dataset)])
+    .range([0,250]);
+
+    var axis = d3.svg.axis().scale(linear)
+    .orient('bottom')
+    .ticks(7);
+    svg.append('g').attr({
+      "class":"axis",
+      "transform":"translate(20,130)"
+    }).call(axis)
+  </script> 
+</body> 
+</html>
