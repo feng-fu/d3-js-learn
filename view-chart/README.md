@@ -17,3 +17,10 @@
    	 - 适合于游戏应用
 
 D3.js一般使用SVG
+
+```
+svg.selectAll('rect')   // 选择其中的所有矩形
+.data(dataset)  // 绑定数组
+.enter()  // 指定选择集的enter部分
+.append("rect")  // 根据dataset的长度添加足够的矩形
+```	
