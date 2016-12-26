@@ -1,0 +1,99 @@
+<html>
+<head> 
+  <meta charset="utf-8"> 
+  <title>HelloWorld</title> 
+  <style>
+  .axis path,
+  .axis line{
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+  }
+
+  .axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+  }
+
+  .MyRect {
+    fill: steelblue;
+  }
+
+  .MyText {
+    fill: white;
+    text-anchor: middle;
+  }
+
+  </style>
+</head> 
+<body>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script> 
+  <script>
+    // 创建一个画布
+    var width = 400;
+    var height = 400;
+
+    var svg = d3.select('body').append('svg').attr({
+      'width':width,
+      'height':height
+    })
+
+    var padding = {left: 30,right: 30,top: 20,bottom: 20};
+
+    var dataset = [10,20,30,40,33,24,12,5];
+
+    var xScale = d3.scale.ordinal()
+    .domain(d3.range(dataset.length))
+    .rangeRoundBands([0,width - padding.left - padding.right])
+    var yScale = d3.scale.ordinal()
+    .domain([0,d3.max(dataset)])
+    .range([height - padding.top - padding.bottom])
+
+    var xAxis = d3.svg.axis().scale(xScale).orient('bottom')
+    var yAxis = d3.svg.axis().scale(yScale).orient('left')
+
+    var rectPadding = 4;
+
+    var rects = svg.selectAll('rect').data(dataset).enter()
+    .append('rect').attr({
+      'class':'MyRect',
+      'transform':'translate(' + padding.left + ',' + padding.top + ')',
+      'x':function(d,i){
+        return xScale(i) + rectPadding/2;
+      },
+      'y':function(d){
+        return yScale(d)
+      },
+      'width':xScale.rangeBand() - rectPadding,
+      'height':function(d){
+        return height - padding.top - padding.bottom - yScale(d)
+      }
+    })
+
+    var texts = svg.selectAll('.Mytitle').data(dataset).enter()
+    .append('text').attr({
+      'class':'Mytitle',
+      'transform':'translate(' + padding.left + ',' + padding.top + ')',
+      'x':function(d,i){
+        return xScale(i) + rectPadding/2
+      },
+      'y':function(d){
+        return yScale(d)
+      },
+      'dx':function(){
+        return (xScale.rangeBand() - rectPadding)/2;
+      },
+      'dy':function(d){
+        return 20;
+      }
+    }).text(function(d){
+      return d;
+    })
+
+    svg.append('g').attr({
+      'class':'axis',
+      'transform':'translate(' + padding.left + ',' + padding.top + ')'
+    }).call(yAxis)
+  </script> 
+</body> 
+</html>
