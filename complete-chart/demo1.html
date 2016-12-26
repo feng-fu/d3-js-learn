@@ -45,9 +45,9 @@
     var xScale = d3.scale.ordinal()
     .domain(d3.range(dataset.length))
     .rangeRoundBands([0,width - padding.left - padding.right])
-    var yScale = d3.scale.ordinal()
+    var yScale = d3.scale.linear()
     .domain([0,d3.max(dataset)])
-    .range([height - padding.top - padding.bottom])
+    .range([height - padding.top - padding.bottom,0])
 
     var xAxis = d3.svg.axis().scale(xScale).orient('bottom')
     var yAxis = d3.svg.axis().scale(yScale).orient('left')
@@ -89,6 +89,11 @@
     }).text(function(d){
       return d;
     })
+    
+    svg.append("g")
+      .attr("class","axis")
+      .attr("transform","translate(" + padding.left + "," + (height - padding.bottom) + ")")
+      .call(xAxis);
 
     svg.append('g').attr({
       'class':'axis',
