@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script>
+    var data = [
+      { name: "Alice", value: 2 },
+      { name: "Bob", value: 3 },
+      { name: "Carol", value: 1 },
+      { name: "Dwayne", value: 5 }
+    ];
+    // d3.scan() 。找到极值的索引
+    var i = d3.scan(data, function (a, b) { return a.value - b.value; }); // 2
+    //d3对data中的元素两两比较，返回较小的，funtion运行了3+2+1=6次
+    console.log(data[i]); // {name: "Carol", value: 1}
+    // d3.ticks和d3.tickStep方法在生成刻度时是非常有用的
+    var ticks = d3.ticks(0, 10, 5); // [0, 2, 4, 6, 8, 10]   0到10，中间至少五个点
+    var tickstep = d3.tickStep(0,10,5) // 同上，结果为中间的间隔
+    console.log(ticks, tickstep)
+  </script>
+</body>
+
+</html>
